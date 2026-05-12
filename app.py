@@ -32,41 +32,72 @@ st.markdown("""
 
     html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
 
-    .main { background: #0d1117; }
+    /* ── Light / Dark mode support ──────────────────────────── */
+    :root {
+        --bg-main: #0d1117;
+        --bg-card: linear-gradient(135deg, #161b22 0%, #1c2128 100%);
+        --border-color: #30363d;
+        --text-primary: #c9d1d9;
+        --text-secondary: #8b949e;
+        --accent: #58a6ff;
+        --sidebar-bg: #161b22;
+        --sidebar-border: #21262d;
+        --predict-popular-bg: linear-gradient(135deg, #0d2818, #0a3a1d);
+        --predict-not-bg: linear-gradient(135deg, #2d1515, #3d1a1a);
+        --insight-bg: #161b22;
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --bg-main: #ffffff;
+            --bg-card: linear-gradient(135deg, #f6f8fa 0%, #eaeef2 100%);
+            --border-color: #d0d7de;
+            --text-primary: #24292f;
+            --text-secondary: #57606a;
+            --accent: #0969da;
+            --sidebar-bg: #f6f8fa;
+            --sidebar-border: #d0d7de;
+            --predict-popular-bg: linear-gradient(135deg, #dafbe1, #b3f0c7);
+            --predict-not-bg: linear-gradient(135deg, #ffebe9, #fddcdb);
+            --insight-bg: #f6f8fa;
+        }
+    }
+
+    .main { background: var(--bg-main); }
 
     .metric-card {
-        background: linear-gradient(135deg, #161b22 0%, #1c2128 100%);
-        border: 1px solid #30363d;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
         border-radius: 12px;
         padding: 20px 24px;
         text-align: center;
         transition: border-color 0.2s;
     }
-    .metric-card:hover { border-color: #58a6ff; }
+    .metric-card:hover { border-color: var(--accent); }
     .metric-value {
         font-family: 'JetBrains Mono', monospace;
         font-size: 2rem;
         font-weight: 600;
-        color: #58a6ff;
+        color: var(--accent);
         line-height: 1.2;
     }
     .metric-label {
         font-size: 0.78rem;
-        color: #8b949e;
+        color: var(--text-secondary);
         text-transform: uppercase;
         letter-spacing: 0.08em;
         margin-top: 4px;
     }
 
     .predict-result-popular {
-        background: linear-gradient(135deg, #0d2818, #0a3a1d);
+        background: var(--predict-popular-bg);
         border: 1px solid #2ea043;
         border-radius: 12px;
         padding: 24px;
         margin-top: 16px;
     }
     .predict-result-not {
-        background: linear-gradient(135deg, #2d1515, #3d1a1a);
+        background: var(--predict-not-bg);
         border: 1px solid #da3633;
         border-radius: 12px;
         padding: 24px;
@@ -76,17 +107,17 @@ st.markdown("""
     .section-header {
         font-family: 'JetBrains Mono', monospace;
         font-size: 0.8rem;
-        color: #58a6ff;
+        color: var(--accent);
         text-transform: uppercase;
         letter-spacing: 0.12em;
-        border-bottom: 1px solid #21262d;
+        border-bottom: 1px solid var(--sidebar-border);
         padding-bottom: 8px;
         margin-bottom: 16px;
     }
 
     div[data-testid="stSidebarContent"] {
-        background: #161b22;
-        border-right: 1px solid #21262d;
+        background: var(--sidebar-bg);
+        border-right: 1px solid var(--sidebar-border);
     }
 
     .stButton>button {
@@ -101,14 +132,14 @@ st.markdown("""
     }
     .stButton>button:hover { background: #2ea043; }
 
-    .stSlider .st-bk { background: #58a6ff; }
+    .stSlider .st-bk { background: var(--accent); }
     .insight-box {
-        background: #161b22;
-        border-left: 3px solid #58a6ff;
+        background: var(--insight-bg);
+        border-left: 3px solid var(--accent);
         border-radius: 0 8px 8px 0;
         padding: 12px 16px;
         font-size: 0.88rem;
-        color: #c9d1d9;
+        color: var(--text-primary);
         margin-top: 12px;
     }
 </style>

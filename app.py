@@ -32,7 +32,7 @@ st.markdown("""
 
     html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
 
-    /* ── Light / Dark mode support ──────────────────────────── */
+    /* ── Dark mode default (CSS variables) ────────────────────── */
     :root {
         --bg-main: #0d1117;
         --bg-card: linear-gradient(135deg, #161b22 0%, #1c2128 100%);
@@ -47,6 +47,7 @@ st.markdown("""
         --insight-bg: #161b22;
     }
 
+    /* ── High-contrast light mode ─────────────────────────────── */
     @media (prefers-color-scheme: light), (prefers-color-scheme: no-preference) {
         :root {
             --bg-main: #ffffff;

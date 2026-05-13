@@ -47,19 +47,73 @@ st.markdown("""
         --insight-bg: #161b22;
     }
 
-    @media (prefers-color-scheme: light) {
+    @media (prefers-color-scheme: light), (prefers-color-scheme: no-preference) {
         :root {
             --bg-main: #ffffff;
             --bg-card: linear-gradient(135deg, #f6f8fa 0%, #eaeef2 100%);
             --border-color: #d0d7de;
-            --text-primary: #24292f;
-            --text-secondary: #57606a;
-            --accent: #0969da;
-            --sidebar-bg: #f6f8fa;
+            --text-primary: #1f2328;
+            --text-secondary: #656d76;
+            --accent: #0550ae;
+            --sidebar-bg: #ffffff;
             --sidebar-border: #d0d7de;
             --predict-popular-bg: linear-gradient(135deg, #dafbe1, #b3f0c7);
             --predict-not-bg: linear-gradient(135deg, #ffebe9, #fddcdb);
             --insight-bg: #f6f8fa;
+        }
+        .main {
+            background: #ffffff !important;
+            color: #1f2328 !important;
+        }
+        .metric-card {
+            background: #f6f8fa !important;
+            border: 1px solid #d0d7de !important;
+        }
+        .metric-card .metric-value {
+            color: #0550ae !important;
+        }
+        .metric-card .metric-label {
+            color: #656d76 !important;
+        }
+        div[data-testid="stSidebarContent"] {
+            background: #ffffff !important;
+            border-right: 1px solid #d0d7de !important;
+        }
+        .stButton>button {
+            background: #2da44e !important;
+            color: #ffffff !important;
+        }
+        .stButton>button:hover {
+            background: #218838 !important;
+        }
+        div[data-testid="stMarkdownContainer"] {
+            color: #1f2328 !important;
+        }
+        .st-emotion-cache-zt5ig4 {
+            color: #1f2328 !important;
+        }
+        .section-header {
+            color: #0550ae !important;
+            border-bottom: 1px solid #d0d7de !important;
+        }
+        .insight-box {
+            background: #f6f8fa !important;
+            border-left: 3px solid #0550ae !important;
+            color: #1f2328 !important;
+        }
+        .predict-result-popular {
+            background: linear-gradient(135deg, #dafbe1, #b3f0c7) !important;
+            border: 1px solid #2ea043 !important;
+        }
+        .predict-result-not {
+            background: linear-gradient(135deg, #ffebe9, #fddcdb) !important;
+            border: 1px solid #da3633 !important;
+        }
+        div.st-emotion-cache-1r6slb0 {
+            color: #1f2328 !important;
+        }
+        span.st-emotion-cache-10trblm {
+            color: #1f2328 !important;
         }
     }
 

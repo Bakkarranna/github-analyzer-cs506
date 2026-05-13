@@ -25,14 +25,14 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# ── Custom CSS ────────────────────────────────────────────────────────────────
+# ── Custom CSS (Dark mode default, light mode override) ──────────────────────
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@300;400;600&display=swap');
 
     html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
 
-    /* ── Dark mode default (CSS variables) ────────────────────── */
+    /* ── Dark mode (DEFAULT) ─────────────────────────────────── */
     :root {
         --bg-main: #0d1117;
         --bg-card: linear-gradient(135deg, #161b22 0%, #1c2128 100%);
@@ -47,9 +47,21 @@ st.markdown("""
         --insight-bg: #161b22;
     }
 
-    /* ── High-contrast light mode ─────────────────────────────── */
-    @media (prefers-color-scheme: light), (prefers-color-scheme: no-preference) {
+    /* Dark mode base overrides */
+    :root {
+        color-scheme: dark;
+    }
+    .stApp {
+        background-color: #0d1117 !important;
+    }
+    div[data-testid="stToolbar"] {
+        background: #0d1117 !important;
+    }
+
+    /* ── Light mode (only when user explicitly prefers light) ── */
+    @media (prefers-color-scheme: light) {
         :root {
+            color-scheme: light !important;
             --bg-main: #ffffff;
             --bg-card: linear-gradient(135deg, #f6f8fa 0%, #eaeef2 100%);
             --border-color: #d0d7de;
@@ -62,9 +74,26 @@ st.markdown("""
             --predict-not-bg: linear-gradient(135deg, #ffebe9, #fddcdb);
             --insight-bg: #f6f8fa;
         }
+        .stApp {
+            background-color: #ffffff !important;
+        }
+        div[data-testid="stToolbar"] {
+            background: #ffffff !important;
+        }
         .main {
             background: #ffffff !important;
             color: #1f2328 !important;
+        }
+        div[data-testid="stSidebarContent"] {
+            background: #ffffff !important;
+            border-right: 1px solid #d0d7de !important;
+        }
+        div[data-testid="stSidebarContent"] * {
+            color: #1f2328 !important;
+        }
+        .section-header {
+            color: #0550ae !important;
+            border-bottom: 1px solid #d0d7de !important;
         }
         .metric-card {
             background: #f6f8fa !important;
@@ -76,26 +105,12 @@ st.markdown("""
         .metric-card .metric-label {
             color: #656d76 !important;
         }
-        div[data-testid="stSidebarContent"] {
-            background: #ffffff !important;
-            border-right: 1px solid #d0d7de !important;
-        }
         .stButton>button {
             background: #2da44e !important;
             color: #ffffff !important;
         }
         .stButton>button:hover {
             background: #218838 !important;
-        }
-        div[data-testid="stMarkdownContainer"] {
-            color: #1f2328 !important;
-        }
-        .st-emotion-cache-zt5ig4 {
-            color: #1f2328 !important;
-        }
-        .section-header {
-            color: #0550ae !important;
-            border-bottom: 1px solid #d0d7de !important;
         }
         .insight-box {
             background: #f6f8fa !important;
@@ -110,10 +125,11 @@ st.markdown("""
             background: linear-gradient(135deg, #ffebe9, #fddcdb) !important;
             border: 1px solid #da3633 !important;
         }
-        div.st-emotion-cache-1r6slb0 {
+        /* Fix all text elements in light mode */
+        p, span, div, label, h1, h2, h3, h4, h5, h6 {
             color: #1f2328 !important;
         }
-        span.st-emotion-cache-10trblm {
+        div[data-testid="stMarkdownContainer"] p {
             color: #1f2328 !important;
         }
     }
@@ -187,7 +203,6 @@ st.markdown("""
     }
     .stButton>button:hover { background: #2ea043; }
 
-    .stSlider .st-bk { background: var(--accent); }
     .insight-box {
         background: var(--insight-bg);
         border-left: 3px solid var(--accent);

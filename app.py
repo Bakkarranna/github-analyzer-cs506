@@ -32,225 +32,149 @@ st.markdown("""
 
     html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
 
-    /* Dark mode specific styles */
-    @media (prefers-color-scheme: dark) {
-        .main { background: #0d1117; }
+    /* ── Dark mode default (CSS variables) ────────────────────── */
+    :root {
+        --bg-main: #0d1117;
+        --bg-card: linear-gradient(135deg, #161b22 0%, #1c2128 100%);
+        --border-color: #30363d;
+        --text-primary: #c9d1d9;
+        --text-secondary: #8b949e;
+        --accent: #58a6ff;
+        --sidebar-bg: #161b22;
+        --sidebar-border: #21262d;
+        --predict-popular-bg: linear-gradient(135deg, #0d2818, #0a3a1d);
+        --predict-not-bg: linear-gradient(135deg, #2d1515, #3d1a1a);
+        --insight-bg: #161b22;
+    }
 
+    /* ── High-contrast light mode ─────────────────────────────── */
+    @media (prefers-color-scheme: light), (prefers-color-scheme: no-preference) {
+        :root {
+            --bg-main: #ffffff;
+            --bg-card: linear-gradient(135deg, #f6f8fa 0%, #eaeef2 100%);
+            --border-color: #d0d7de;
+            --text-primary: #1f2328;
+            --text-secondary: #656d76;
+            --accent: #0550ae;
+            --sidebar-bg: #ffffff;
+            --sidebar-border: #d0d7de;
+            --predict-popular-bg: linear-gradient(135deg, #dafbe1, #b3f0c7);
+            --predict-not-bg: linear-gradient(135deg, #ffebe9, #fddcdb);
+            --insight-bg: #f6f8fa;
+        }
+        .main {
+            background: #ffffff !important;
+            color: #1f2328 !important;
+        }
         .metric-card {
-            background: linear-gradient(135deg, #161b22 0%, #1c2128 100%);
-            border: 1px solid #30363d;
-            border-radius: 12px;
-            padding: 20px 24px;
-            text-align: center;
-            transition: border-color 0.2s;
+            background: #f6f8fa !important;
+            border: 1px solid #d0d7de !important;
         }
-        .metric-card:hover { border-color: #58a6ff; }
-        .metric-value {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 2rem;
-            font-weight: 600;
-            color: #58a6ff;
-            line-height: 1.2;
+        .metric-card .metric-value {
+            color: #0550ae !important;
         }
-        .metric-label {
-            font-size: 0.78rem;
-            color: #8b949e;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-top: 4px;
+        .metric-card .metric-label {
+            color: #656d76 !important;
         }
-
+        div[data-testid="stSidebarContent"] {
+            background: #ffffff !important;
+            border-right: 1px solid #d0d7de !important;
+        }
+        .stButton>button {
+            background: #2da44e !important;
+            color: #ffffff !important;
+        }
+        .stButton>button:hover {
+            background: #218838 !important;
+        }
+        div[data-testid="stMarkdownContainer"] {
+            color: #1f2328 !important;
+        }
+        .st-emotion-cache-zt5ig4 {
+            color: #1f2328 !important;
+        }
+        .section-header {
+            color: #0550ae !important;
+            border-bottom: 1px solid #d0d7de !important;
+        }
+        .insight-box {
+            background: #f6f8fa !important;
+            border-left: 3px solid #0550ae !important;
+            color: #1f2328 !important;
+        }
         .predict-result-popular {
-            background: linear-gradient(135deg, #0d2818, #0a3a1d);
-            border: 1px solid #2ea043;
-            border-radius: 12px;
-            padding: 24px;
-            margin-top: 16px;
+            background: linear-gradient(135deg, #dafbe1, #b3f0c7) !important;
+            border: 1px solid #2ea043 !important;
         }
         .predict-result-not {
-            background: linear-gradient(135deg, #2d1515, #3d1a1a);
-            border: 1px solid #da3633;
-            border-radius: 12px;
-            padding: 24px;
-            margin-top: 16px;
+            background: linear-gradient(135deg, #ffebe9, #fddcdb) !important;
+            border: 1px solid #da3633 !important;
         }
-
-        .section-header {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            color: #58a6ff;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            border-bottom: 1px solid #21262d;
-            padding-bottom: 8px;
-            margin-bottom: 16px;
+        div.st-emotion-cache-1r6slb0 {
+            color: #1f2328 !important;
         }
-
-        div[data-testid="stSidebarContent"] {
-            background: #161b22;
-            border-right: 1px solid #21262d;
-        }
-
-        .stButton>button {
-            background: #238636;
-            color: #ffffff;
-            border: none;
-            border-radius: 8px;
-            padding: 10px 24px;
-            font-weight: 600;
-            transition: background 0.2s;
-            width: 100%;
-        }
-        .stButton>button:hover { background: #2ea043; }
-
-        .stSlider .st-bk { background: #58a6ff; }
-        .insight-box {
-            background: #161b22;
-            border-left: 3px solid #58a6ff;
-            border-radius: 0 8px 8px 0;
-            padding: 12px 16px;
-            font-size: 0.88rem;
-            color: #c9d1d9;
-            margin-top: 12px;
+        span.st-emotion-cache-10trblm {
+            color: #1f2328 !important;
         }
     }
 
-    /* Light mode specific styles */
-    @media (prefers-color-scheme: light) {
-        .main { background: #ffffff; }
+    .main { background: var(--bg-main); }
 
-        .metric-card {
-            background: linear-gradient(135deg, #f6f8fa 0%, #eaeef2 100%);
-            border: 1px solid #d0d7de;
-            border-radius: 12px;
-            padding: 20px 24px;
-            text-align: center;
-            transition: border-color 0.2s;
-        }
-        .metric-card:hover { border-color: #0969da; }
-        .metric-value {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 2rem;
-            font-weight: 600;
-            color: #0969da;
-            line-height: 1.2;
-        }
-        .metric-label {
-            font-size: 0.78rem;
-            color: #57606a;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-top: 4px;
-        }
-
-        .predict-result-popular {
-            background: linear-gradient(135deg, #dafbe1 0%, #aceebb 100%);
-            border: 1px solid #1a7f37;
-            border-radius: 12px;
-            padding: 24px;
-            margin-top: 16px;
-        }
-        .predict-result-not {
-            background: linear-gradient(135deg, #ffebe9 0%, #ffc1ba 100%);
-            border: 1px solid #cf222e;
-            border-radius: 12px;
-            padding: 24px;
-            margin-top: 16px;
-        }
-
-        .section-header {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            color: #0969da;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            border-bottom: 1px solid #d0d7de;
-            padding-bottom: 8px;
-            margin-bottom: 16px;
-        }
-
-        div[data-testid="stSidebarContent"] {
-            background: #f6f8fa;
-            border-right: 1px solid #d0d7de;
-        }
-
-        .stButton>button {
-            background: #1a7f37;
-            color: #ffffff;
-            border: none;
-            border-radius: 8px;
-            padding: 10px 24px;
-            font-weight: 600;
-            transition: background 0.2s;
-            width: 100%;
-        }
-        .stButton>button:hover { background: #146c2e; }
-
-        .stSlider .st-bk { background: #0969da; }
-        .insight-box {
-            background: #f6f8fa;
-            border-left: 3px solid #0969da;
-            border-radius: 0 8px 8px 0;
-            padding: 12px 16px;
-            font-size: 0.88rem;
-            color: #24292f;
-            margin-top: 12px;
-        }
-    }
-
-    /* Default fallback (dark mode) */
-    .main { background: #0d1117; }
     .metric-card {
-        background: linear-gradient(135deg, #161b22 0%, #1c2128 100%);
-        border: 1px solid #30363d;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
         border-radius: 12px;
         padding: 20px 24px;
         text-align: center;
         transition: border-color 0.2s;
     }
-    .metric-card:hover { border-color: #58a6ff; }
+    .metric-card:hover { border-color: var(--accent); }
     .metric-value {
         font-family: 'JetBrains Mono', monospace;
         font-size: 2rem;
         font-weight: 600;
-        color: #58a6ff;
+        color: var(--accent);
         line-height: 1.2;
     }
     .metric-label {
         font-size: 0.78rem;
-        color: #8b949e;
+        color: var(--text-secondary);
         text-transform: uppercase;
         letter-spacing: 0.08em;
         margin-top: 4px;
     }
+
     .predict-result-popular {
-        background: linear-gradient(135deg, #0d2818, #0a3a1d);
+        background: var(--predict-popular-bg);
         border: 1px solid #2ea043;
         border-radius: 12px;
         padding: 24px;
         margin-top: 16px;
     }
     .predict-result-not {
-        background: linear-gradient(135deg, #2d1515, #3d1a1a);
+        background: var(--predict-not-bg);
         border: 1px solid #da3633;
         border-radius: 12px;
         padding: 24px;
         margin-top: 16px;
     }
+
     .section-header {
         font-family: 'JetBrains Mono', monospace;
         font-size: 0.8rem;
-        color: #58a6ff;
+        color: var(--accent);
         text-transform: uppercase;
         letter-spacing: 0.12em;
-        border-bottom: 1px solid #21262d;
+        border-bottom: 1px solid var(--sidebar-border);
         padding-bottom: 8px;
         margin-bottom: 16px;
     }
+
     div[data-testid="stSidebarContent"] {
-        background: #161b22;
-        border-right: 1px solid #21262d;
+        background: var(--sidebar-bg);
+        border-right: 1px solid var(--sidebar-border);
     }
+
     .stButton>button {
         background: #238636;
         color: #ffffff;
@@ -262,14 +186,15 @@ st.markdown("""
         width: 100%;
     }
     .stButton>button:hover { background: #2ea043; }
-    .stSlider .st-bk { background: #58a6ff; }
+
+    .stSlider .st-bk { background: var(--accent); }
     .insight-box {
-        background: #161b22;
-        border-left: 3px solid #58a6ff;
+        background: var(--insight-bg);
+        border-left: 3px solid var(--accent);
         border-radius: 0 8px 8px 0;
         padding: 12px 16px;
         font-size: 0.88rem;
-        color: #c9d1d9;
+        color: var(--text-primary);
         margin-top: 12px;
     }
 </style>

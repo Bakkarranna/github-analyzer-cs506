@@ -38,7 +38,7 @@ os.makedirs(MODEL_DIR, exist_ok=True)
 def load_data():
     print("[1/7] Loading cleaned data...")
     df = pd.read_csv(INPUT_FILE)
-    print(f"      Loaded: {len(df):,} rows × {df.shape[1]} columns")
+    print(f"      Loaded: {len(df):,} rows x {df.shape[1]} columns")
     return df
 
 
@@ -95,7 +95,7 @@ def train_random_forest(X_train, y_train):
     ])
     rf_pipeline.fit(X_train, y_train)
     cv_scores = cross_val_score(rf_pipeline, X_train, y_train, cv=5, scoring="accuracy")
-    print(f"      CV Accuracy: {cv_scores.mean():.4f} ± {cv_scores.std():.4f}")
+    print(f"      CV Accuracy: {cv_scores.mean():.4f} +/- {cv_scores.std():.4f}")
     return rf_pipeline, cv_scores
 
 
@@ -112,7 +112,7 @@ def train_gradient_boosting(X_train, y_train):
     ])
     gb_pipeline.fit(X_train, y_train)
     cv_scores = cross_val_score(gb_pipeline, X_train, y_train, cv=5, scoring="accuracy")
-    print(f"      CV Accuracy: {cv_scores.mean():.4f} ± {cv_scores.std():.4f}")
+    print(f"      CV Accuracy: {cv_scores.mean():.4f} +/- {cv_scores.std():.4f}")
     return gb_pipeline, cv_scores
 
 
@@ -128,12 +128,12 @@ def evaluate_and_select(rf_model, gb_model, rf_cv, gb_cv, X_test, y_test):
     rf_auc = roc_auc_score(y_test, rf_model.predict_proba(X_test)[:, 1])
     gb_auc = roc_auc_score(y_test, gb_model.predict_proba(X_test)[:, 1])
 
-    print(f"\n      ┌─────────────────────────┬──────────┬──────────┐")
-    print(f"      │ Model                   │ Accuracy │ AUC-ROC  │")
-    print(f"      ├─────────────────────────┼──────────┼──────────┤")
-    print(f"      │ Random Forest           │  {rf_acc:.4f}  │  {rf_auc:.4f}  │")
-    print(f"      │ Gradient Boosting       │  {gb_acc:.4f}  │  {gb_auc:.4f}  │")
-    print(f"      └─────────────────────────┴──────────┴──────────┘")
+    print(f"\n      {'='*40}")
+    print(f"      {'Model':<25} {'Accuracy':<10} {'AUC-ROC':<10}")
+    print(f"      {'-'*40}")
+    print(f"      {'Random Forest':<25} {rf_acc:<10.4f} {rf_auc:<10.4f}")
+    print(f"      {'Gradient Boosting':<25} {gb_acc:<10.4f} {gb_auc:<10.4f}")
+    print(f"      {'='*40}")
 
     # Select best by AUC
     if rf_auc >= gb_auc:
@@ -151,7 +151,7 @@ def evaluate_and_select(rf_model, gb_model, rf_cv, gb_cv, X_test, y_test):
         best_cv = gb_cv.mean()
         y_pred = gb_pred
 
-    print(f"\n      ✅  Best model: {best_name} (AUC = {best_auc:.4f})")
+    print(f"\n      >>  Best model: {best_name} (AUC = {best_auc:.4f})")
     print(f"\n      Classification Report:\n")
     print(classification_report(y_test, y_pred, target_names=["Not Popular", "Popular"]))
 
@@ -181,7 +181,7 @@ def save_artifacts(model, metrics, feature_columns):
     print(f"      Model saved:    {MODEL_FILE}")
     print(f"      Metrics saved:  {METRICS_FILE}")
     print(f"      Features saved: {FEATURES_FILE}")
-    print(f"\n🎉  Training complete!")
+    print(f"\n**  Training complete!")
 
 
 def main():
@@ -191,7 +191,7 @@ def main():
     print("=" * 55)
 
     if not os.path.exists(INPUT_FILE):
-        print(f"\n❌  ERROR: '{INPUT_FILE}' not found.")
+        print(f"\n!!  ERROR: '{INPUT_FILE}' not found.")
         print("     Run preprocess.py first.")
         return
 
